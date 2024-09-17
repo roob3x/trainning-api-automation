@@ -1,0 +1,2 @@
+restricoes_endpoint: /api/v1/restricoes/
+simulacoes_endpoint: /api/v1/simulacoes/
