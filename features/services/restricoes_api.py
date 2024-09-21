@@ -1,5 +1,4 @@
-from qa_platform.core.utils import do_request
-from support import endpoints.yml
+from qa_platform.core.utils.backend import do_request
 
 def get_restricoes(url):
     headers = ""
