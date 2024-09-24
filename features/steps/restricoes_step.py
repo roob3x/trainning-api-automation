@@ -3,7 +3,7 @@ from hamcrest import assert_that, is_
 
 @given('desejo verificar restricao para o cpf "{cpf}"')
 def step_impl(context, cpf):
-    url = context.config.userdata['base_url_local'] + 'api/v1/restricoes/'+cpf
+    url = context.config.userdata['base_url_local'] + context.endpoint['restricoes_endpoint']+cpf
     context.get_restricoes_response = get_restricoes(url)
 
 @then('valido que é retornado status code {status_code}')

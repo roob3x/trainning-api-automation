@@ -1,4 +1,4 @@
-from qa_platform.core.utils.backend import do_request
+from qa_platform.core.utils.factory import do_request
 
 def get_restricoes(url):
     headers = ""
