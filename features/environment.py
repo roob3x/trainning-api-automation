@@ -1,11 +1,9 @@
 import yaml
-import sys
 import os
 
 
 
 def before_scenario(context,scenario):
-    ## TODO ajustar load arquivo YML
     load_yaml_files(context)
 
 
