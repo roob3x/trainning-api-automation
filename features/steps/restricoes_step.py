@@ -1,4 +1,5 @@
 from services.restricoes_api import *
+from services.fac import *
 from hamcrest import assert_that, is_
 
 @given('desejo verificar restricao para o cpf "{cpf}"')
