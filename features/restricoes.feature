@@ -1,6 +1,6 @@
-Feature: Restricoes CPF
+Feature: Consulta Restricao
 
-@sanity @e2e @restricoes
+@sanity @integration @restricoes
 Scenario Outline: Obter a lista de cpfs restritos
     Given desejo verificar restricao para o cpf <cpf>
     Then valido que é retornado status code 200
@@ -10,3 +10,8 @@ Examples:
     | cpf           |
     | "60094146012" |
     | "97093236014" |
+
+@integration @sem_restricoes
+Scenario: Verifico cpfs sem restricao
+    Given desejo verificar restricao para o cpf "3210154482"
+    Then valido que é retornado status code 204
