@@ -7,10 +7,15 @@ def step_impl(context):
     context.payload = get_fixtures('post_restricoes')['V1_SIMULACOES']
     for row in context.table:
         context.payload['nome'] = row['nome']
-        context.payload['cpf'] = row['cpf']
+        if row['cpf']  == 'None':
+            del context.payload["cpf"]
+        elif row['cpf'] == 'dinamico':
+            context.payload['cpf'] = generate_personal_id_br()
         context.payload['email'] = row['email']
         context.payload['parcelas'] = row['parcelas']
         context.payload['seguro'] = row['seguro']
+    
+    #print(teste)
 
 @when('submeto a simulacao')
 def step_impl(context):
