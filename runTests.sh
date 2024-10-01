@@ -1,1 +1,1 @@
-behave
+behave --tags=$1

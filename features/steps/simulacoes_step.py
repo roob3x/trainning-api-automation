@@ -8,9 +8,13 @@ def step_impl(context):
     for row in context.table:
         context.payload['nome'] = row['nome']
         context.payload['cpf'] = row['cpf']
+        if context.payload['cpf']  == 'None':
+            del context.payload["cpf"]
         context.payload['email'] = row['email']
         context.payload['parcelas'] = row['parcelas']
         context.payload['seguro'] = row['seguro']
+
+        print(context.payload)
 
 @when('submeto a simulacao')
 def step_impl(context):
