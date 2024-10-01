@@ -1,4 +1,4 @@
-from qa_platform.core.utils.factory import *
+from qa_platform.core.utils.fridge import *
 from services import *
 
 def post_simulacoes(url, payload):
