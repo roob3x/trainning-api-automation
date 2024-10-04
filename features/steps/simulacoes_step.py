@@ -3,7 +3,7 @@ from services.fac import *
 from hamcrest import assert_that, is_
 
 @given('que preparo os dados da simulacao')
-def step_impl(context):
+def prepare_simulation(context):
     context.payload = get_fixtures('post_restricoes')['V1_SIMULACOES']
     for row in context.table:
         context.payload['nome'] = row['nome']
@@ -18,10 +18,20 @@ def step_impl(context):
     #print(teste)
 
 @when('submeto a simulacao')
-def step_impl(context):
+def simulation_submit(context):
     url = context.config.userdata['base_url_local']+ context.endpoint['simulacoes_endpoint']
     context.post_restricoes_response = post_simulacoes(url, context.payload)
 
 @then('valido que a simulacao retornou status code {status_code}')
-def step_impl(context, status_code):
+def validate_status_code(context, status_code):
     assert_that(context.post_restricoes_response.status_code, is_(int(status_code)))
+
+
+@given('que eu cadastro uma simulacao')
+def register_simulation(context):
+    prepare_simulation(context)
+    simulation_submit(context)
+    validate_status_code(context, 201)
+
+#@when('altero os dados de uma simulacao ja cadastrada')
+#def put_simulation(context):

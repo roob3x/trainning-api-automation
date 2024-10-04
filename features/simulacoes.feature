@@ -30,3 +30,11 @@ Scenario: Verifico que nao é possivel fazer simulacao para o mesmo cpf duas vez
         Then valido que a simulacao retornou status code 409
 
 
+    @integration @put_simulacoes @put_simulacoes_sucessfull
+    Scenario: Verifique que é possivel alterar simulacao previamente cadastrada
+        Given que eu cadastro uma simulacao
+            | nome  | cpf      | email                   | valor | parcelas | seguro |
+            | Chico | dinamico | chicotestador@gmail.com | 1200  | 3        | False  |
+        #When altero os dados de uma simulacao ja cadastrada
+
+
