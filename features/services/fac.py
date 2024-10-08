@@ -10,3 +10,7 @@ def get_response(response):
 
 def get_status_code(response):
     return response.status_code
+
+
+def get_message_from_response(response, message):
+    return response[f'{message}']

@@ -20,12 +20,12 @@ Scenario: Verifico que nao é possivel criar simulacao cpf fora do padrao
 Scenario: Verifico que nao é possivel fazer simulacao para o mesmo cpf duas vezes
         Given que preparo os dados da simulacao
             | nome  | cpf            | email                   | valor | parcelas | seguro |
-            | Chico | 321.015.075-00 | chicotestador@gmail.com | 1200  | 3        | False  |
+            | Chico | dinamico | chicotestador@gmail.com | 1200  | 3        | False  |
         When submeto a simulacao
         Then valido que a simulacao retornou status code 201
         Given que preparo os dados da simulacao
-            | nome  | cpf            | email                   | valor | parcelas | seguro |
-            | Chico | 321.015.075-00 | chicotestador@gmail.com | 1200  | 3        | False  |
+            | nome  | cpf  | email                   | valor | parcelas | seguro |
+            | Ana   | same | ana@gmail.com | 1200  | 3        | False  |
         When submeto a simulacao
         Then valido que a simulacao retornou status code 409
 
@@ -37,8 +37,17 @@ Scenario: Verifico que nao é possivel fazer simulacao para o mesmo cpf duas vez
             | Chico | dinamico | chicotestador@gmail.com | 1200  | 3        | False  |
         When altero os dados de uma simulacao ja cadastrada
             | nome  | cpf      | email                    | valor | parcelas | seguro|
-            | Ana | dinamico   | aninha@gmail.com         | 25000 | 5        | True  |
+            | Ana   | dinamico   | aninha@gmail.com         | 25000 | 5        | True  |
         And submeto simulacao atualizada
         Then valido que a atualizacao da simulacao retornou status code 200
+    
+    @integration @put_simulacoes @put_simulacoes_alternative
+    Scenario: Verifique que é retornado erro ao tentar alterar proposta com cpf inexistente
+        When altero os dados de uma simulacao ja cadastrada
+            | nome        | cpf         | email                | valor | parcelas | seguro |
+            | Assulamita  | 01350081663 | assulamita@gmail.com | 40000 | 10       | True |
+        And submeto simulacao alterada
+        Then valido que a atualizacao da simulacao retornou status code 404
+        And valido que é retornando mensagem de erro de cpf nao encontrado
 
 
