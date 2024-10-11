@@ -13,5 +13,5 @@ Examples:
 
 @integration @sem_restricoes
 Scenario: Verifico cpfs sem restricao
-    Given desejo verificar restricao para o cpf "3210154482"
+    Given desejo verificar restricao para o cpf "321.015.075-44"
     Then valido que é retornado status code 204
