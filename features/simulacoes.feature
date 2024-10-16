@@ -37,7 +37,7 @@ Scenario: Verifico que nao é possivel fazer simulacao para o mesmo cpf duas vez
             | Chico | dinamico | chicotestador@gmail.com | 1200  | 3        | False  |
         When altero os dados de uma simulacao ja cadastrada
             | nome  | cpf      | email                    | valor | parcelas | seguro|
-            | Ana   | dinamico   | aninha@gmail.com       | 25000 | 5        | True  |
+            | Ana   | dinamico | aninha@gmail.com       | 25000 | 5        | True  |
         And submeto simulacao atualizada
         Then valido que é retornado status code 200
     
@@ -64,5 +64,13 @@ Scenario: Verifico que nao é possivel fazer simulacao para o mesmo cpf duas vez
         When consulto uma simulacao para cpf inexistente
         Then valido que é retornado status code 404
         And valido na consulta de inexistente, retornando mensagem de erro de cpf nao encontrado
+    
+    @integration @del_simulacoes @sucessful
+    Scenario: Removendo simulacao existente
+        Given que eu cadastro uma simulacao
+            | nome        | cpf      | email            | valor | parcelas | seguro |
+            | Joao Campos | dinamico | joaoc@gmail.com  | 2500  | 10       | True   |
+        When submeto requisicao para deletar a simulacao
+        Then valido que é retornado status code 200
 
 

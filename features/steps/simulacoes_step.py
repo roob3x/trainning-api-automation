@@ -83,3 +83,8 @@ def get_simulation_valite_msg_erro_of_cpf(context):
     get_expected_response = str(get_msg_payload).replace("VALUECPF", context.payload['cpf'])
     get_msg_from_response = get_message_from_response(get_response(context.response), 'mensagem')
     assert_that(get_msg_from_response, is_(get_expected_response))
+
+@when('submeto requisicao para deletar a simulacao')
+def delete_simulation(context):
+    url = context.config.userdata['base_url_local'] + context.endpoint['simulacoes_endpoint'] + str(context.response.json()['id'])
+    context.response = del_simulacao(url)

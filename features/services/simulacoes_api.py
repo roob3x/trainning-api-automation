@@ -23,3 +23,11 @@ def get_simulacao(url):
     }
     payload = ""
     return do_request("GET", url, headers, payload)
+
+def del_simulacao(url):
+    headers = {
+        'accept': '*/*',
+    }
+    payload = ""
+    return do_request("DELETE", url, headers, payload)
+    
