@@ -88,3 +88,9 @@ def get_simulation_valite_msg_erro_of_cpf(context):
 def delete_simulation(context):
     url = context.config.userdata['base_url_local'] + context.endpoint['simulacoes_endpoint'] + str(context.response.json()['id'])
     context.response = del_simulacao(url)
+
+@when('submeto requisicao para deletar simulacao inexistente')
+def delete_unexist_simulation(context):
+    context.response = get_fixtures('del_simulacoes')['UNEXIST_ID']
+    url = context.config.userdata['base_url_local'] + context.endpoint['simulacoes_endpoint'] + str(context.response['id'])
+    context.response = del_simulacao(url)
